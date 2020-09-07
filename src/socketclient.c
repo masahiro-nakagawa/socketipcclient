@@ -72,7 +72,7 @@ int unix_client() {
   // 上記設定を用いてサーバーに接続
   ret_code = connect(fd, (const struct sockaddr *)&sun, sizeof(sun));
   if (ret_code == -1) {
-    printf("failed to create_socket(errno:%d, error_str:%s)\n", errno, strerror(errno));
+    printf("failed to open_socket(errno:%d, error_str:%s)\n", errno, strerror(errno));
     close(fd);
     return -1;
   }
