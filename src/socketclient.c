@@ -48,9 +48,9 @@ int unix_client() {
   int response = -1;  // レスポンス考えるの面倒だったので0:OK/1:NGで。
 
     /*test environment variable reference*/
-  char* s = getenv("SNAP_USER_DATA");
+  char* s = "/home/masahiro/snap/socketipcserver/x15/share.sock";
   printf("SNAP_USER_DATA: %s\n",s);
-  strcat(s, "/share.sock");
+  //strcat(s, "/share.sock");
   printf("Full path is %s\n",s);
 
   // ソケットアドレス構造体
@@ -63,6 +63,8 @@ int unix_client() {
     printf("failed to create_socket(errno=%d:%s)\n", errno, strerror(errno));
     return -1;
   }
+  printf("Socket has been created successfully\n");
+
 
   // ソケットアドレス構造体に接続先(サーバー)を設定
   sun.sun_family = AF_LOCAL;

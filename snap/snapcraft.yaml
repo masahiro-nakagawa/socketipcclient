@@ -9,7 +9,7 @@ description: |
   store.
 
 grade: stable # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 parts:
   socketipcclient:
@@ -25,10 +25,10 @@ apps:
   socketipcclient:
     command: tcp_client
     plugs:
-      - network
+      - network-bind
 plugs:
-  socket-directory:
+  test-content-plug:
     interface: content
     content: socket-directory
-    target: $SNAP_USER_DATA
+    target: $SNAP_USER_DATA/share.sock
    
