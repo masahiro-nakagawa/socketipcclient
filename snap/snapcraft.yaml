@@ -25,10 +25,12 @@ apps:
   socketipcclient:
     command: tcp_client
     plugs:
+      - network
       - network-bind
+
 plugs:
   test-content-plug:
     interface: content
     content: socket-directory
-    target: $SNAP_USER_DATA/share.sock
+    target: $SNAP_DATA
    

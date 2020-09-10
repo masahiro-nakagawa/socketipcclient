@@ -48,8 +48,9 @@ int unix_client() {
   int response = -1;  // レスポンス考えるの面倒だったので0:OK/1:NGで。
 
     /*test environment variable reference*/
-  char* s = "/home/masahiro/snap/socketipcserver/x15/share.sock";
-  printf("SNAP_USER_DATA: %s\n",s);
+  // char* s = "/home/masahiro/snap/socketipcserver/x15/share.sock";
+  char* s = getenv("SNAP_DATA");
+  printf("SNAP_DATA: %s\n",s);
   //strcat(s, "/share.sock");
   printf("Full path is %s\n",s);
 
