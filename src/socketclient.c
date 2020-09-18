@@ -51,7 +51,7 @@ int unix_client() {
   // char* s = "/home/masahiro/snap/socketipcserver/x15/share.sock";
   char* s = getenv("SNAP_DATA");
   printf("SNAP_DATA: %s\n",s);
-  //strcat(s, "/share.sock");
+  strcat(s, "/share.sock");
   printf("Full path is %s\n",s);
 
   // ソケットアドレス構造体
@@ -75,7 +75,7 @@ int unix_client() {
   // 上記設定を用いてサーバーに接続
   ret_code = connect(fd, (const struct sockaddr *)&sun, sizeof(sun));
   if (ret_code == -1) {
-    printf("failed to open_socket(errno:%d, error_str:%s)\n", errno, strerror(errno));
+    printf("failed to connect to socket(errno:%d, error_str:%s)\n", errno, strerror(errno));
     close(fd);
     return -1;
   }
@@ -99,6 +99,8 @@ int unix_client() {
     return -1;
   }
 
+  printf("About to send data\n");
+
   // データ本体の送信
   size = send(fd, buf, buf_len, flags);
   if (size < buf_len) {
@@ -108,6 +110,8 @@ int unix_client() {
     return -1;
   }
 
+  printf("Waiting for a response from server\n");
+  
   // レスポンスの受信(今回は0:OK/1:NG)
   size = recv(fd, &response, sizeof(response), flags);
   if (size < sizeof(response)) {
